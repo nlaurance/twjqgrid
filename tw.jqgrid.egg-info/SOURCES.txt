@@ -1,6 +1,10 @@
 MANIFEST.in
 setup.cfg
 setup.py
+docs/conf.py
+docs/index.rst
+tests/__init__.py
+tests/test_widget.py
 tw/__init__.py
 tw.jqgrid.egg-info/PKG-INFO
 tw.jqgrid.egg-info/SOURCES.txt
@@ -15,3 +19,8 @@ tw/jqgrid/__init__.py
 tw/jqgrid/release.py
 tw/jqgrid/samples.py
 tw/jqgrid/widgets.py
+tw/jqgrid/static/css/jquery-ui-1.8.2.custom.css
+tw/jqgrid/static/css/ui.jqgrid.css
+tw/jqgrid/static/i18n/grid.locale-en.js
+tw/jqgrid/static/i18n/grid.locale-fr.js
+tw/jqgrid/static/javascript/jquery.jqGrid.min.js

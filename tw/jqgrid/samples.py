@@ -6,9 +6,9 @@ These samples will appear in the WidgetBrowser
 See http://toscawidgets.org/documentation/WidgetBrowser for more information
 """
 
-from tw.jqgrid import Jqgrid
+from tw.jqgrid import JqGrid
 
-class DemoJqgrid(Jqgrid):
+class DemoJqGrid(JqGrid):
     # Provide default parameters, value, etc... here
     # default = <some-default-value>
     pass

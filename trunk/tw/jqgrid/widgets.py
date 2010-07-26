@@ -44,28 +44,36 @@ class JqGrid(Widget):
            "height" : "The height of the grid.",
            "shrinkToFit" : "if True, every column width is scaled according to the defined option width.",
            "width" : "If this option is set, the initial width of each column is set according to the value of shrinkToFit option.",
+           "toolbar" : "This option defines the toolbar of the grid. This is array with two values in which the first value enables the toolbar and the second defines the position relative to body Layer.",
+           "rownumbers" : "If this option is set to true, a new column at left of the grid is added.",
+           "toppager" : "When enabled this option place a pager element at top of the grid below the caption (if available).",
+           "autowidth" : "When set to true, the grid width is recalculated automatically to the width of the parent element.",
+           "multiselect" : "If this flag is set to true a multi selection of rows is enabled.",
+           "multiselectWidth" : "Determines the width of the multiselect column if multiselect is set to true.",
            }
 
     datatype = "json"
     mtype = "GET"
+    toolbar = [False, '']
+    rownumbers = False
+    toppager = False
+    autowidth = False
+    multiselect = False
+    multiselectWidth = 20
 
     def __init__(self, **kwargs):
         """
         """
         super(JqGrid, self).__init__(**kwargs)
-        if not kwargs.get("id",None):
+        if not kwargs.get("id", False):
             raise ValueError, "JqGrid is supposed to have id"
-        if not kwargs.get("url",None):
+        if not kwargs.get("url", False):
             raise ValueError, "JqGrid must have url for fetching data"
-        if not kwargs.get("colModel",None):
+        if not kwargs.get("colModel", False):
             raise ValueError, "JqGrid must have colModel for setting up the columns"
 
-        if not kwargs.get("pager",None):
-            self.pager = '%s_pager' % self.id
-        if not kwargs.get("height",None):
-            self.height = '100%'
-        if not kwargs.get("shrinkToFit",None):
-            self.height = False
+        # default values
+        self.pager = kwargs.get("pager", '%s_pager' % self.id)
 
     def update_params(self, d):
         super(JqGrid, self).update_params(d)
@@ -84,6 +92,12 @@ class JqGrid(Widget):
                            height=self.height,
                            shrinkToFit=self.shrinkToFit,
                            width=self.width,
+                           toolbar=self.toolbar,
+                           rownumbers=self.rownumbers,
+                           toppager=self.toppager,
+                           autowidth=self.autowidth,
+                           multiselect=self.multiselect,
+                           multiselectWidth=self.multiselectWidth,
                            )
         call = js_function('$("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)

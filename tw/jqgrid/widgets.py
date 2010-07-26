@@ -15,6 +15,8 @@ jquery_jqgrid = JSLink(modname=__name__,
 
 jqgrid_ui_css = CSSLink(modname=__name__, filename='static/css/jquery-ui-1.8.2.custom.css')
 jqgrid_css = CSSLink(modname=__name__, filename='static/css/ui.jqgrid.css')
+jqgrid_search_css = CSSLink(modname=__name__, filename='static/css/jquery.searchFilter.css')
+
 
 class JqGrid(Widget):
     """
@@ -23,10 +25,11 @@ class JqGrid(Widget):
     template = """
              <table id="${id}"></table>
              <div id="${id}_pager"></div>
+             <div id="${id}_search"></div>
              """
 
     javascript = [jquery_jqgrid]
-    css = [jqgrid_ui_css, jqgrid_css]
+    css = [jqgrid_ui_css, jqgrid_css, jqgrid_search_css]
 
     params = {
            "url": "Tells us where to get the data.",
@@ -60,6 +63,8 @@ class JqGrid(Widget):
     autowidth = False
     multiselect = False
     multiselectWidth = 20
+    navbuttons_options = {"view":False, "edit": False, "add": False,"del": False,
+                          "search":True,"refresh":False}
 
     def __init__(self, **kwargs):
         """
@@ -99,5 +104,17 @@ class JqGrid(Widget):
                            multiselect=self.multiselect,
                            multiselectWidth=self.multiselectWidth,
                            )
-        call = js_function('$("#%s").jqGrid' % d.id)(grid_params)
+        call = js_function('jQuery("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)
+        # search options documentation can be found at:
+        # http://www.trirand.com/jqgridwiki/doku.php?id=wiki:singe_searching#options
+        search_call = js_function('jQuery("#%s").jqGrid' % d.id)('navGrid', '#%s_pager' % d.id,
+                                                                 self.navbuttons_options,
+                                                                 {}, #  default settings for edit
+                                                                 {}, #  default settings for add
+                                                                 {}, # delete instead that del:false we need this
+                                                                 self.search_options,
+                                                                 {} # view parameters
+                                                                 )
+
+        self.add_call(search_call)

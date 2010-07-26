@@ -26,7 +26,7 @@
 .ui-jqgrid tr.ui-search-toolbar th { border-top-width: 1px !important; border-top-color: inherit !important; border-top-style: ridge !important }
 tr.ui-search-toolbar input {margin: 1px 0px 0px 0px}
 tr.ui-search-toolbar select {margin: 1px 0px 0px 0px}
-/* body */ 
+/* body */
 .ui-jqgrid .ui-jqgrid-bdiv {position: relative; margin: 0em; padding:0; overflow: auto;}
 .ui-jqgrid .ui-jqgrid-btable {table-layout:fixed; margin:0em;}
 .ui-jqgrid tr.jqgrow td {font-weight: normal; overflow: hidden; white-space: pre; height: 22px;padding: 0 2px 0 2px;border-bottom-width: 1px; border-bottom-color: inherit; border-bottom-style: solid;}
@@ -50,7 +50,7 @@ tr.ui-search-toolbar select {margin: 1px 0px 0px 0px}
 .ui-jqgrid .ui-pg-button:hover { padding: 0px; }
 .ui-jqgrid .ui-state-disabled:hover {padding:1px;}
 .ui-jqgrid .ui-pg-input { height:13px;font-size:.8em; margin: 0em;}
-.ui-jqgrid .ui-pg-selbox {font-size:.8em; line-height:18px; display:block; height:18px; margin: 0em;}
+.ui-jqgrid .ui-pg-selbox {font-size:.8em; line-height:18px; display:block; height:18px; margin: 0em; padding: 0 5px 0 0;}
 .ui-jqgrid .ui-separator {height: 18px; border-left: 1px solid #ccc ; border-right: 1px solid #ccc ; margin: 1px; float: right;}
 .ui-jqgrid .ui-paging-info {font-weight: normal;height:19px; margin-top:3px;margin-right:4px;}
 .ui-jqgrid .ui-jqgrid-pager .ui-pg-div {padding:1px 0;cursor:pointer; float:left;list-style-image:none;list-style-position:outside;list-style-type:none;position:relative;}
@@ -75,7 +75,7 @@ tr.ui-search-toolbar select {margin: 1px 0px 0px 0px}
 /*Modal Window */
 .ui-jqdialog { display: none; width: 300px; position: absolute; padding: .2em; font-size:11px; overflow:visible;}
 .ui-jqdialog .ui-jqdialog-titlebar { padding: .3em .2em; position: relative;  }
-.ui-jqdialog .ui-jqdialog-title { margin: .1em 0 .2em; } 
+.ui-jqdialog .ui-jqdialog-title { margin: .1em 0 .2em; }
 .ui-jqdialog .ui-jqdialog-titlebar-close { position: absolute;  top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; }
 
 .ui-jqdialog .ui-jqdialog-titlebar-close span { display: block; margin: 1px; }

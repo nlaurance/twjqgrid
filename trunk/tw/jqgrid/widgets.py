@@ -41,7 +41,9 @@ class JqGrid(Widget):
            "sortname" :"Sets the initial sorting column.",
            "viewrecords" :"Defines whether we want to display the number of total records from the query in the pager bar",
            "caption" :"Sets the caption for the grid.",
-           "height" : "The height of the grid."
+           "height" : "The height of the grid.",
+           "shrinkToFit" : "if True, every column width is scaled according to the defined option width.",
+           "width" : "If this option is set, the initial width of each column is set according to the value of shrinkToFit option.",
            }
 
     datatype = "json"
@@ -62,6 +64,8 @@ class JqGrid(Widget):
             self.pager = '%s_pager' % self.id
         if not kwargs.get("height",None):
             self.height = '100%'
+        if not kwargs.get("shrinkToFit",None):
+            self.height = False
 
     def update_params(self, d):
         super(JqGrid, self).update_params(d)
@@ -78,6 +82,8 @@ class JqGrid(Widget):
                            viewrecords=self.viewrecords,
                            caption=self.caption,
                            height=self.height,
+                           shrinkToFit=self.shrinkToFit,
+                           width=self.width,
                            )
         call = js_function('$("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)

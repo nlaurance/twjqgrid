@@ -1,9 +1,8 @@
-from tw.api import Widget, JSLink, CSSLink
+from tw.api import Widget, JSLink, CSSLink, js_function
 from tw.jquery import jquery_js
 from tw.jquery.ui import jquery_ui_all_js
-from tw.jquery.ui import
 
-__all__ = ["Jqgrid"]
+__all__ = ["JqGrid"]
 
 # declare your static resources here
 i18n_jqgrid = JSLink(modname=__name__,
@@ -42,6 +41,7 @@ class JqGrid(Widget):
            "sortname" :"Sets the initial sorting column.",
            "viewrecords" :"Defines whether we want to display the number of total records from the query in the pager bar",
            "caption" :"Sets the caption for the grid.",
+           "height" : "The height of the grid."
            }
 
     datatype = "json"
@@ -51,15 +51,17 @@ class JqGrid(Widget):
         """
         """
         super(JqGrid, self).__init__(**kwargs)
-        if not getattr(d,"id",None):
+        if not kwargs.get("id",None):
             raise ValueError, "JqGrid is supposed to have id"
-        if not getattr(d,"url",None):
+        if not kwargs.get("url",None):
             raise ValueError, "JqGrid must have url for fetching data"
-        if not getattr(d,"colModel",None):
+        if not kwargs.get("colModel",None):
             raise ValueError, "JqGrid must have colModel for setting up the columns"
 
-        if not getattr(d,"pager",None):
+        if not kwargs.get("pager",None):
             self.pager = '%s_pager' % self.id
+        if not kwargs.get("height",None):
+            self.height = '100%'
 
     def update_params(self, d):
         super(JqGrid, self).update_params(d)
@@ -75,6 +77,7 @@ class JqGrid(Widget):
                            sortname=self.sortname,
                            viewrecords=self.viewrecords,
                            caption=self.caption,
+                           height=self.height,
                            )
         call = js_function('$("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)

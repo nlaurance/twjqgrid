@@ -50,7 +50,7 @@ setup(
         samples = tw.jqgrid.samples
     """,
     keywords = [
-        'toscawidgets.widgets',
+        'toscawidgets.widgets','jquery','grid','jqgrid'
     ],
     long_description=long_description,
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers

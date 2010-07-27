@@ -65,6 +65,10 @@ class JqGrid(Widget):
     multiselectWidth = 20
     navbuttons_options = {"view":False, "edit": False, "add": False,"del": False,
                           "search":True,"refresh":False}
+    addbutton_options = {}
+    editbutton_options = {}
+    delbutton_options = {}
+    viewbutton_options = {}
 
     def __init__(self, **kwargs):
         """
@@ -108,13 +112,19 @@ class JqGrid(Widget):
         self.add_call(call)
         # search options documentation can be found at:
         # http://www.trirand.com/jqgridwiki/doku.php?id=wiki:singe_searching#options
-        search_call = js_function('jQuery("#%s").jqGrid' % d.id)('navGrid', '#%s_pager' % d.id,
-                                                                 self.navbuttons_options,
-                                                                 {}, #  default settings for edit
-                                                                 {}, #  default settings for add
-                                                                 {}, # delete instead that del:false we need this
-                                                                 self.search_options,
-                                                                 {} # view parameters
-                                                                 )
+        nav_call = js_function('jQuery("#%s").jqGrid' % d.id)\
+                                 ('navGrid', '#%s_pager' % d.id,
+                                     self.navbuttons_options,
+                                     #  default settings for edit
+                                     self.editbutton_options,
+                                     # default settings for add
+                                     self.addbutton_options,
+                                     # default settings for delete
+                                     self.delbutton_options,
+                                     # search parameters
+                                     self.search_options,
+                                     # view parameters
+                                     self.viewbutton_options,
+                                     )
 
-        self.add_call(search_call)
+        self.add_call(nav_call)

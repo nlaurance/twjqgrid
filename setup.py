@@ -36,7 +36,7 @@ setup(
     install_requires=[
         "ToscaWidgets",
         ## Add other requirements here
-        # "Genshi",
+        "tw.jquery",
         ],
     packages=find_packages(exclude=['ez_setup', 'tests']),
     namespace_packages = ['tw'],

@@ -10,5 +10,4 @@ from tw.jqgrid import JqGrid
 
 class DemoJqGrid(JqGrid):
     # Provide default parameters, value, etc... here
-    # default = <some-default-value>
-    pass
+    demo_for = JqGrid

@@ -50,7 +50,7 @@ in the view controller ::
 
     class MoviesController(BaseRestController):
 
-        @expose('qubic.backoffice.templates.rest.movies.get_all')
+        @expose('project.templates.movies.get_all')
         def get_all(self):
             pylons.c.grid = grid_local
             return dict(page='all movies')

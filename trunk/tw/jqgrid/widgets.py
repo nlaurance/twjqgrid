@@ -70,12 +70,12 @@ class JqGrid(Widget):
     delbutton_options = {}
     viewbutton_options = {}
 
-    def __init__(self, **kwargs):
+    def __init__(self, id, **kwargs):
         """
         """
         super(JqGrid, self).__init__(**kwargs)
-        if not kwargs.get("id", False):
-            raise ValueError, "JqGrid is supposed to have id"
+#        if not kwargs.get("id", False):
+#            raise ValueError, "JqGrid is supposed to have id"
         if not kwargs.get("url", False):
             raise ValueError, "JqGrid must have url for fetching data"
         if not kwargs.get("colModel", False):

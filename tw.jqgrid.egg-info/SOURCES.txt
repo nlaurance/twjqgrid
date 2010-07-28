@@ -1,6 +1,10 @@
 .project
 .pydevproject
+CHANGES.txt
+Contributors.txt
 MANIFEST.in
+README.txt
+paster.ini
 setup.cfg
 setup.py
 docs/conf.py
@@ -22,6 +26,7 @@ tw/jqgrid/release.py
 tw/jqgrid/samples.py
 tw/jqgrid/widgets.py
 tw/jqgrid/static/css/jquery-ui-1.8.2.custom.css
+tw/jqgrid/static/css/jquery.searchFilter.css
 tw/jqgrid/static/css/ui.jqgrid.css
 tw/jqgrid/static/i18n/grid.locale-en.js
 tw/jqgrid/static/i18n/grid.locale-fr.js

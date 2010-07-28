@@ -84,6 +84,19 @@ now to feed data we need a controller::
                           movie.synopsis]} for movie in movies]
         return dict(page=page, total=total, records=result_count, rows=rows)
 
-
-
 .. note:: this is written for an elixir model, adapt to your need
+
+design it:
+
+tw.jqgrid rely on tw.uitheme for its design, the smooth theme is the default
+you can use any other theme, or roll your own `http://jqueryui.com/themeroller/`_
+
+below a code snippet on how to do that::
+
+    from tw.uitheme import lefrog_css, peppergrinder_css
+    from tw.jqgrid import jqgrid_css, jqgrid_search_css
+
+    class CustomGrid(JqGrid):
+        css = [peppergrinder_css, jqgrid_css, jqgrid_search_css]
+
+    grid_local = CustomGrid(.....

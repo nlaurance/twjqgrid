@@ -37,6 +37,7 @@ setup(
         "ToscaWidgets",
         ## Add other requirements here
         "tw.jquery",
+        "tw.uitheme",
         ],
     packages=find_packages(exclude=['ez_setup', 'tests']),
     namespace_packages = ['tw'],

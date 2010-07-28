@@ -2,7 +2,7 @@ from tw.api import Widget, JSLink, CSSLink, js_function
 from tw.jquery import jquery_js
 from tw.jquery.ui import jquery_ui_all_js
 
-__all__ = ["JqGrid"]
+__all__ = ["JqGrid","jqgrid_css","jqgrid_search_css"]
 
 # declare your static resources here
 i18n_jqgrid = JSLink(modname=__name__,
@@ -13,7 +13,9 @@ jquery_jqgrid = JSLink(modname=__name__,
                filename='static/javascript/jquery.jqGrid.min.js',
                javascript=[jquery_js, jquery_ui_all_js, i18n_jqgrid])
 
-jqgrid_ui_css = CSSLink(modname=__name__, filename='static/css/jquery-ui-1.8.2.custom.css')
+
+from tw.uitheme import smoothness_css
+
 jqgrid_css = CSSLink(modname=__name__, filename='static/css/ui.jqgrid.css')
 jqgrid_search_css = CSSLink(modname=__name__, filename='static/css/jquery.searchFilter.css')
 
@@ -29,7 +31,7 @@ class JqGrid(Widget):
              """
 
     javascript = [jquery_jqgrid]
-    css = [jqgrid_ui_css, jqgrid_css, jqgrid_search_css]
+    css = [smoothness_css, jqgrid_css, jqgrid_search_css]
 
     params = {
            "url": "Tells us where to get the data.",

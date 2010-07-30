@@ -4,7 +4,7 @@
 __DISTRIBUTION__ = 'tw.jqgrid'
 __DESCRIPTION__ = 'tosca widget wrapper around jqgrid library'
 __URL__ = 'http://code.google.com/p/twjqgrid'
-__VERSION__ = '0.1a1'
+__VERSION__ = '0.1a2'
 __AUTHOR__ = 'Nicolas Laurance'
 __EMAIL__ = 'nicolas[dot]laurance[at]gmail[dot]com'
 __COPYRIGHT__ = "Copyright 2010 Nicolas Laurance"

@@ -55,10 +55,15 @@ class JqGrid(Widget):
            "autowidth" : "When set to true, the grid width is recalculated automatically to the width of the parent element.",
            "multiselect" : "If this flag is set to true a multi selection of rows is enabled.",
            "multiselectWidth" : "Determines the width of the multiselect column if multiselect is set to true.",
+           "subGrid" : "If set to true this enables using a subgrid.",
+           "subGridUrl" : "This option points to the file from which we get the data for the subgrid. jqGrid adds the id of the row to this url as parameter. If there is a need to pass additional parameters, use the params option in subGridModel",
+           "subGridModel" : "It is an array in which we describe the column model for the subgrid data",
+           "subGridWidth" : "Determines the width of the subGrid column if subgrid is enabled. ",
            }
 
     datatype = "json"
     mtype = "GET"
+    subGrid = False
     toolbar = [False, '']
     rownumbers = False
     toppager = False
@@ -109,6 +114,11 @@ class JqGrid(Widget):
                            autowidth=self.autowidth,
                            multiselect=self.multiselect,
                            multiselectWidth=self.multiselectWidth,
+
+                           subGrid=self.subGrid,
+                           subGridUrl=self.subGridUrl,
+                           subGridModel=self.subGridModel,
+                           subGridWidth=self.subGridWidth,
                            )
         call = js_function('jQuery("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)

@@ -59,6 +59,7 @@ class JqGrid(Widget):
            "subGridUrl" : "This option points to the file from which we get the data for the subgrid. jqGrid adds the id of the row to this url as parameter. If there is a need to pass additional parameters, use the params option in subGridModel",
            "subGridModel" : "It is an array in which we describe the column model for the subgrid data",
            "subGridWidth" : "Determines the width of the subGrid column if subgrid is enabled. ",
+           "subGridRowExpanded" : "This event is raised when the subgrid is enabled and is executed when the user clicks on the plus icon of the grid.",
            }
 
     datatype = "json"
@@ -93,7 +94,6 @@ class JqGrid(Widget):
 
     def update_params(self, d):
         super(JqGrid, self).update_params(d)
-
         grid_params = dict(url=self.url,
                            datatype=self.datatype,
                            mtype=self.mtype,
@@ -119,6 +119,7 @@ class JqGrid(Widget):
                            subGridUrl=self.subGridUrl,
                            subGridModel=self.subGridModel,
                            subGridWidth=self.subGridWidth,
+                           subGridRowExpanded=self.subGridRowExpanded,
                            )
         call = js_function('jQuery("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)

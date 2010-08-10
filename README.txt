@@ -61,6 +61,8 @@ in the template::
 
 now to feed data we need a controller::
 
+    from math import ceil
+
     @expose('json')
     def fetch(self, page=1, rows=10, sidx=1, sord='asc', _search='false',\
               searchOper=u'', searchField=u'', searchString=u'', **kwargs):
@@ -69,14 +71,14 @@ now to feed data we need a controller::
         search_bool = eval(_search.capitalize())
         if (search_bool):
             field = str(searchField)
-            field_attr = Movie.__getattribute__(Movie, field)
+            field_attr = getattr(Movie, field)
             if searchOper == u'cn':
-                q = medias_q.filter(field_attr.like(u'%%%s%%' % searchString))
+                q = medias_q.filter(field_attr.contains(searchString))
             if searchOper == u'bw':
-                q = q.filter(field_attr.like(u'%s%%' % searchString))
+                q = q.filter(field_attr.startswith(searchString))
 
         result_count = medias_q.count()
-        total = 1 + result_count / int(rows)
+        total = int(ceil(result_count / float(rows))) # total nb of pages
         column = getattr(Movie.table.c, sidx)
         movies = q.order_by(getattr(column,sord)()).offset(offset).limit(rows)
         rows = [{'id'  : movie.id,

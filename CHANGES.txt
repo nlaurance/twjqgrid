@@ -1,6 +1,10 @@
 New in 0.1
 ==========
 
+0.1a4
+sortorder has "asc" as default value
+better example in readme
+
 0.1a3
 added sortorder param to allow setting of default order
 thanks to : Tuomas Peltonen

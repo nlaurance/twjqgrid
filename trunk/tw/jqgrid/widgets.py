@@ -63,8 +63,10 @@ class JqGrid(Widget):
            "subGridRowExpanded" : "This event is raised when the subgrid is enabled and is executed when the user clicks on the plus icon of the grid.",
            }
 
+    #defaults
     datatype = "json"
-    mtype = "GET"
+    mtype = "POST"
+    sortorder = "asc"
     subGrid = False
     toolbar = [False, '']
     rownumbers = False
@@ -77,6 +79,7 @@ class JqGrid(Widget):
     addbutton_options = {}
     editbutton_options = {}
     delbutton_options = {}
+    search_options = {}
     viewbutton_options = {}
 
     def __init__(self, id, **kwargs):

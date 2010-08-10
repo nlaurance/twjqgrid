@@ -125,6 +125,10 @@ Description:
         
         * Nicolas Laurance <nicolas[dot]laurance[at]gmail[dot]com>
         
+        with contributions from
+        -----------------------
+        
+        * Tuomas Peltonen
         
         Change history
         **************
@@ -132,8 +136,12 @@ Description:
         New in 0.1
         ==========
         
+        0.1a3
+        added sortorder param to allow setting of default order
+        thanks to : Tuomas Peltonen
+        
         0.1a2
-        addes parameters for subgrids
+        added parameters for subgrids
         
         0.1a1
         added dependency on tw.uitheme for design

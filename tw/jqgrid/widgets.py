@@ -56,6 +56,7 @@ class JqGrid(Widget):
 
     params = {
            "url": "Tells us where to get the data.",
+           "editurl": "Defines the url for inline and form editing",
            "datatype" : "This tells jqGrid the type of information being returned so it can construct the grid.",
            "mtype" :"Tells us how to make the ajax call: either 'GET' or 'POST'.",
            "colNames" :"An array in which we place the names of the columns. ",
@@ -87,6 +88,7 @@ class JqGrid(Widget):
            }
 
     #defaults
+    editurl = None
     datatype = "json"
     mtype = "POST"
     sortorder = "asc"
@@ -145,6 +147,7 @@ class JqGrid(Widget):
     def update_params(self, d):
         super(JqGrid, self).update_params(d)
         grid_params = dict(url=self.url,
+                           editurl=self.editurl,
                            datatype=self.datatype,
                            mtype=self.mtype,
                            colNames=self.colNames,

@@ -13,6 +13,27 @@ jquery_jqgrid = JSLink(modname=__name__,
                filename='static/javascript/jquery.jqGrid.min.js',
                javascript=[jquery_js, jquery_ui_all_js, i18n_jqgrid])
 
+# <DEBUG>
+# for debugging purpose ordered as in grid.loader.js
+#debug_base =  JSLink(modname=__name__, filename='static/src/grid.base.js')
+#debug_common =  JSLink(modname=__name__, filename='static/src/grid.common.js')
+#debug_formedit =  JSLink(modname=__name__, filename='static/src/grid.formedit.js',
+#                         javascript=[jquery_js, jquery_ui_all_js, i18n_jqgrid,
+#                                     debug_base, debug_common])
+#debug_inlinedit =  JSLink(modname=__name__, filename='static/src/grid.inlinedit.js')
+#debug_celledit =  JSLink(modname=__name__, filename='static/src/grid.celledit.js')
+#debug_subgrid =  JSLink(modname=__name__, filename='static/src/grid.subgrid.js')
+#debug_treegrid =  JSLink(modname=__name__, filename='static/src/grid.treegrid.js')
+#debug_custom =  JSLink(modname=__name__, filename='static/src/grid.custom.js')
+#debug_postext =  JSLink(modname=__name__, filename='static/src/grid.postext.js')
+#debug_tbltogrid =  JSLink(modname=__name__, filename='static/src/grid.tbltogrid.js')
+#debug_setcolumns =  JSLink(modname=__name__, filename='static/src/grid.setcolumns.js')
+#debug_import =  JSLink(modname=__name__, filename='static/src/grid.import.js')
+#debug_fmatter =  JSLink(modname=__name__, filename='static/src/jquery.fmatter.js')
+#debug_jsonxml =  JSLink(modname=__name__, filename='static/src/JsonXml.js')
+#debug_searchfilter =  JSLink(modname=__name__, filename='static/src/jquery.searchFilter.js')
+#jquery_jqgrid = debug_formedit
+# </DEBUG>
 
 from tw.uitheme import smoothness_css
 
@@ -59,7 +80,9 @@ class JqGrid(Widget):
            "subGrid" : "If set to true this enables using a subgrid.",
            "subGridUrl" : "This option points to the file from which we get the data for the subgrid. jqGrid adds the id of the row to this url as parameter. If there is a need to pass additional parameters, use the params option in subGridModel",
            "subGridModel" : "It is an array in which we describe the column model for the subgrid data",
-           "subGridWidth" : "Determines the width of the subGrid column if subgrid is enabled. ",
+           "subGridWidth" : "Determines the width of the subGrid column if subgrid is enabled.",
+           "beforeRequest" : "javascript callable, called before the request is sent to the server (ts.p.beforeRequest.call(ts)).",
+           "postData" : "additional data to pass to the request",
            "subGridRowExpanded" : "This event is raised when the subgrid is enabled and is executed when the user clicks on the plus icon of the grid.",
            }
 
@@ -71,11 +94,36 @@ class JqGrid(Widget):
     toolbar = [False, '']
     rownumbers = False
     toppager = False
-    autowidth = False
+    autowidth = True
     multiselect = False
     multiselectWidth = 20
+
+    beforeRequest = None
+    postData = {}
+
     navbuttons_options = {"view":False, "edit": False, "add": False,"del": False,
                           "search":True,"refresh":False}
+# full options for the navbuttons_options
+#            edit: true,
+#            editicon: "ui-icon-pencil",
+#            add: true,
+#            addicon:"ui-icon-plus",
+#            del: true,
+#            delicon:"ui-icon-trash",
+#            search: true,
+#            searchicon:"ui-icon-search",
+#            refresh: true,
+#            refreshicon:"ui-icon-refresh",
+#            refreshstate: 'firstpage',
+#            view: false,
+#            viewicon : "ui-icon-document",
+#            position : "left",
+#            closeOnEscape : true,
+#            beforeRefresh : null,  # js callable
+#            afterRefresh : null,
+#            cloneToTop : false
+
+
     addbutton_options = {}
     editbutton_options = {}
     delbutton_options = {}
@@ -86,8 +134,6 @@ class JqGrid(Widget):
         """
         """
         super(JqGrid, self).__init__(**kwargs)
-#        if not kwargs.get("id", False):
-#            raise ValueError, "JqGrid is supposed to have id"
         if not kwargs.get("url", False):
             raise ValueError, "JqGrid must have url for fetching data"
         if not kwargs.get("colModel", False):
@@ -110,15 +156,17 @@ class JqGrid(Widget):
                            sortorder=self.sortorder,
                            viewrecords=self.viewrecords,
                            caption=self.caption,
-                           height=self.height,
                            shrinkToFit=self.shrinkToFit,
+                           height=self.height,
                            width=self.width,
+                           autowidth=self.autowidth,
                            toolbar=self.toolbar,
                            rownumbers=self.rownumbers,
                            toppager=self.toppager,
-                           autowidth=self.autowidth,
                            multiselect=self.multiselect,
                            multiselectWidth=self.multiselectWidth,
+                           beforeRequest=self.beforeRequest,
+                           postData=self.postData,
 
                            subGrid=self.subGrid,
                            subGridUrl=self.subGridUrl,

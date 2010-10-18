@@ -36,12 +36,13 @@ in the view controller ::
                           "refresh":True,
                           }
 
-    grid_local = JqGrid(id='movie_list', url='fetch', caption='Movies',
+    grid_local = JqGrid('movie_list', url='fetch', caption='Movies',
                 colNames=colNames, colModel=colModel,
                 rowList=[5,10], rowNum=5,
                 sortname='title',
                 viewrecords=True,
-                autowidth=True,
+                width='auto',
+                height='auto',
                 shrinkToFit=True,
                 search_options = search_options,
                 navbuttons_options = navbuttons_options,

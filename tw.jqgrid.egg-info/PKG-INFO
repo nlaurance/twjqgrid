@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: tw.jqgrid
-Version: 0.1a3dev-20100806
+Version: 0.1b1dev-20101020
 Summary: tosca widget wrapper around jqgrid library
 Home-page: http://code.google.com/p/twjqgrid
 Author: Nicolas Laurance
@@ -20,7 +20,7 @@ Description:
         tw.jqmultiselect is a tosca widget wrapper around jquery grid plugin
          which can be found here :
         
-        `http://www.trirand.com/blog/`_
+        `http://www.trirand.com/blog/ <http://www.trirand.com/blog/>`_
         
         the version released with this package is 3.7.2
         
@@ -50,12 +50,13 @@ Description:
                                   "refresh":True,
                                   }
         
-            grid_local = JqGrid(id='movie_list', url='fetch', caption='Movies',
+            grid_local = JqGrid('movie_list', url='fetch', caption='Movies',
                         colNames=colNames, colModel=colModel,
                         rowList=[5,10], rowNum=5,
                         sortname='title',
                         viewrecords=True,
-                        autowidth=True,
+                        width='auto',
+                        height='auto',
                         shrinkToFit=True,
                         search_options = search_options,
                         navbuttons_options = navbuttons_options,
@@ -75,6 +76,8 @@ Description:
         
         now to feed data we need a controller::
         
+            from math import ceil
+        
             @expose('json')
             def fetch(self, page=1, rows=10, sidx=1, sord='asc', _search='false',\
                       searchOper=u'', searchField=u'', searchString=u'', **kwargs):
@@ -83,14 +86,14 @@ Description:
                 search_bool = eval(_search.capitalize())
                 if (search_bool):
                     field = str(searchField)
-                    field_attr = Movie.__getattribute__(Movie, field)
+                    field_attr = getattr(Movie, field)
                     if searchOper == u'cn':
-                        q = medias_q.filter(field_attr.like(u'%%%s%%' % searchString))
+                        q = medias_q.filter(field_attr.contains(searchString))
                     if searchOper == u'bw':
-                        q = q.filter(field_attr.like(u'%s%%' % searchString))
+                        q = q.filter(field_attr.startswith(searchString))
         
                 result_count = medias_q.count()
-                total = 1 + result_count / int(rows)
+                total = int(ceil(result_count / float(rows))) # total nb of pages
                 column = getattr(Movie.table.c, sidx)
                 movies = q.order_by(getattr(column,sord)()).offset(offset).limit(rows)
                 rows = [{'id'  : movie.id,
@@ -103,7 +106,7 @@ Description:
         design it:
         
         tw.jqgrid rely on tw.uitheme for its design, the smooth theme is the default
-        you can use any other theme, or roll your own `http://jqueryui.com/themeroller/`_
+        you can use any other theme, or roll your own `theme <http://jqueryui.com/themeroller/>`_
         
         below a code snippet on how to do that::
         
@@ -136,6 +139,13 @@ Description:
         New in 0.1
         ==========
         
+        0.1b1
+        added parameter for edit url
+        
+        0.1a4
+        sortorder has "asc" as default value
+        better example in readme
+        
         0.1a3
         added sortorder param to allow setting of default order
         thanks to : Tuomas Peltonen
@@ -152,7 +162,7 @@ Description:
         
 Keywords: toscawidgets.widgets,jquery,grid,jqgrid
 Platform: UNKNOWN
-Classifier: Development Status :: 3 - Alpha
+Classifier: Development Status :: 4 - Beta
 Classifier: Environment :: Web Environment
 Classifier: Environment :: Web Environment :: ToscaWidgets
 Classifier: Topic :: Software Development :: Libraries :: Python Modules

@@ -6,9 +6,9 @@ tw.jqgrid documentation
 tw.jqmultiselect is a tosca widget wrapper around jquery grid plugin
  which can be found here :
 
-`http://www.trirand.com/blog/`_
+`http://www.trirand.com/blog/ <http://www.trirand.com/blog/>`_
 
-the version released with this package is 3.7.2
+the version released with this package is 3.8.1
 
 in the view controller ::
 
@@ -92,7 +92,7 @@ now to feed data we need a controller::
 design it:
 
 tw.jqgrid rely on tw.uitheme for its design, the smooth theme is the default
-you can use any other theme, or roll your own `http://jqueryui.com/themeroller/`_
+you can use any other theme, or roll your own `theme <http://jqueryui.com/themeroller/>`_
 
 below a code snippet on how to do that::
 

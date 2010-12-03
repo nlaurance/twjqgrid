@@ -15,24 +15,24 @@ jquery_jqgrid = JSLink(modname=__name__,
 
 # <DEBUG>
 # for debugging purpose ordered as in grid.loader.js
-#debug_base =  JSLink(modname=__name__, filename='static/src/grid.base.js')
-#debug_common =  JSLink(modname=__name__, filename='static/src/grid.common.js')
-#debug_formedit =  JSLink(modname=__name__, filename='static/src/grid.formedit.js',
-#                         javascript=[jquery_js, jquery_ui_all_js, i18n_jqgrid,
-#                                     debug_base, debug_common])
-#debug_inlinedit =  JSLink(modname=__name__, filename='static/src/grid.inlinedit.js')
-#debug_celledit =  JSLink(modname=__name__, filename='static/src/grid.celledit.js')
-#debug_subgrid =  JSLink(modname=__name__, filename='static/src/grid.subgrid.js')
-#debug_treegrid =  JSLink(modname=__name__, filename='static/src/grid.treegrid.js')
-#debug_custom =  JSLink(modname=__name__, filename='static/src/grid.custom.js')
-#debug_postext =  JSLink(modname=__name__, filename='static/src/grid.postext.js')
-#debug_tbltogrid =  JSLink(modname=__name__, filename='static/src/grid.tbltogrid.js')
-#debug_setcolumns =  JSLink(modname=__name__, filename='static/src/grid.setcolumns.js')
-#debug_import =  JSLink(modname=__name__, filename='static/src/grid.import.js')
-#debug_fmatter =  JSLink(modname=__name__, filename='static/src/jquery.fmatter.js')
-#debug_jsonxml =  JSLink(modname=__name__, filename='static/src/JsonXml.js')
-#debug_searchfilter =  JSLink(modname=__name__, filename='static/src/jquery.searchFilter.js')
-#jquery_jqgrid = debug_formedit
+debug_base =  JSLink(modname=__name__, filename='static/src/grid.base.js')
+debug_common =  JSLink(modname=__name__, filename='static/src/grid.common.js')
+debug_formedit =  JSLink(modname=__name__, filename='static/src/grid.formedit.js',
+                         javascript=[jquery_js, jquery_ui_all_js, i18n_jqgrid,
+                                     debug_base, debug_common])
+debug_inlinedit =  JSLink(modname=__name__, filename='static/src/grid.inlinedit.js')
+debug_celledit =  JSLink(modname=__name__, filename='static/src/grid.celledit.js')
+debug_subgrid =  JSLink(modname=__name__, filename='static/src/grid.subgrid.js')
+debug_treegrid =  JSLink(modname=__name__, filename='static/src/grid.treegrid.js')
+debug_custom =  JSLink(modname=__name__, filename='static/src/grid.custom.js')
+debug_postext =  JSLink(modname=__name__, filename='static/src/grid.postext.js')
+debug_tbltogrid =  JSLink(modname=__name__, filename='static/src/grid.tbltogrid.js')
+debug_setcolumns =  JSLink(modname=__name__, filename='static/src/grid.setcolumns.js')
+debug_import =  JSLink(modname=__name__, filename='static/src/grid.import.js')
+debug_fmatter =  JSLink(modname=__name__, filename='static/src/jquery.fmatter.js')
+debug_jsonxml =  JSLink(modname=__name__, filename='static/src/JsonXml.js')
+debug_searchfilter =  JSLink(modname=__name__, filename='static/src/jquery.searchFilter.js')
+jquery_jqgrid = debug_formedit
 # </DEBUG>
 
 from tw.uitheme import smoothness_css

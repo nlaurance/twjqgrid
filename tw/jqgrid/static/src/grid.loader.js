@@ -17,6 +17,7 @@ function jqGridInclude()
         { include: true, incfile:'grid.tbltogrid.js'}, //jqGrid table to grid 
         { include: true, incfile:'grid.setcolumns.js'}, //jqGrid setcolumns
         { include: true, incfile:'grid.import.js'}, //jqGrid import
+        { include: true, incfile:'grid.grouping.js'}, //jqGrid grouping
         { include: true, incfile:'jquery.fmatter.js'}, //jqGrid formater
         { include: true, incfile:'JsonXml.js'}, //xmljson utils
         { include: true, incfile:'jquery.searchFilter.js'} // search Plugin

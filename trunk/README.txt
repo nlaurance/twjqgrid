@@ -10,7 +10,11 @@ tw.jqmultiselect is a tosca widget wrapper around jquery grid plugin
 
 the version released with this package is 3.8.1
 
+Use as a grid
+-------------
+
 in the view controller ::
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
     from tw.jqgrid import JqGrid
     colNames = ['ID','Title', 'Synopsis']
@@ -57,6 +61,7 @@ in the view controller ::
             return dict(page='all movies')
 
 in the template::
+~~~~~~~~~~~~~~~~~
 
     ${tmpl_context.grid()}
 
@@ -90,6 +95,7 @@ now to feed data we need a controller::
 .. note:: this is written for an elixir model, adapt to your need
 
 design it:
+~~~~~~~~~~
 
 tw.jqgrid rely on tw.uitheme for its design, the smooth theme is the default
 you can use any other theme, or roll your own `theme <http://jqueryui.com/themeroller/>`_
@@ -103,3 +109,4 @@ below a code snippet on how to do that::
         css = [peppergrinder_css, jqgrid_css, jqgrid_search_css]
 
     grid_local = CustomGrid(.....
+

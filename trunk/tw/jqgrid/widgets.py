@@ -18,21 +18,25 @@ jquery_jqgrid = JSLink(modname=__name__,
 
 #debug_base =  JSLink(modname=__name__, filename='static/src/grid.base.js')
 #debug_common =  JSLink(modname=__name__, filename='static/src/grid.common.js')
+#
+##debug_inlinedit =  JSLink(modname=__name__, filename='static/src/grid.inlinedit.js')
+##debug_celledit =  JSLink(modname=__name__, filename='static/src/grid.celledit.js')
+##debug_subgrid =  JSLink(modname=__name__, filename='static/src/grid.subgrid.js')
+#debug_treegrid =  JSLink(modname=__name__, filename='static/src/grid.treegrid.js')
+##debug_custom =  JSLink(modname=__name__, filename='static/src/grid.custom.js')
+##debug_postext =  JSLink(modname=__name__, filename='static/src/grid.postext.js')
+##debug_tbltogrid =  JSLink(modname=__name__, filename='static/src/grid.tbltogrid.js')
+##debug_setcolumns =  JSLink(modname=__name__, filename='static/src/grid.setcolumns.js')
+##debug_import =  JSLink(modname=__name__, filename='static/src/grid.import.js')
+##debug_fmatter =  JSLink(modname=__name__, filename='static/src/jquery.fmatter.js')
+##debug_jsonxml =  JSLink(modname=__name__, filename='static/src/JsonXml.js')
+##debug_searchfilter =  JSLink(modname=__name__, filename='static/src/jquery.searchFilter.js')
+#
 #debug_formedit =  JSLink(modname=__name__, filename='static/src/grid.formedit.js',
 #                         javascript=[jquery_js, jquery_ui_all_js, i18n_jqgrid,
-#                                     debug_base, debug_common])
-#debug_inlinedit =  JSLink(modname=__name__, filename='static/src/grid.inlinedit.js')
-#debug_celledit =  JSLink(modname=__name__, filename='static/src/grid.celledit.js')
-#debug_subgrid =  JSLink(modname=__name__, filename='static/src/grid.subgrid.js')
-#debug_treegrid =  JSLink(modname=__name__, filename='static/src/grid.treegrid.js')
-#debug_custom =  JSLink(modname=__name__, filename='static/src/grid.custom.js')
-#debug_postext =  JSLink(modname=__name__, filename='static/src/grid.postext.js')
-#debug_tbltogrid =  JSLink(modname=__name__, filename='static/src/grid.tbltogrid.js')
-#debug_setcolumns =  JSLink(modname=__name__, filename='static/src/grid.setcolumns.js')
-#debug_import =  JSLink(modname=__name__, filename='static/src/grid.import.js')
-#debug_fmatter =  JSLink(modname=__name__, filename='static/src/jquery.fmatter.js')
-#debug_jsonxml =  JSLink(modname=__name__, filename='static/src/JsonXml.js')
-#debug_searchfilter =  JSLink(modname=__name__, filename='static/src/jquery.searchFilter.js')
+#                                     debug_base, debug_common, debug_treegrid])
+#
+#
 #jquery_jqgrid = debug_formedit
 
 # </DEBUG>
@@ -48,9 +52,9 @@ class JqGrid(Widget):
     jqgrid full options : http://www.trirand.com/jqgridwiki/doku.php?id=wiki:options
     """
     template = """
-             <table id="${id}"></table>
-             <div id="${id}_pager"></div>
-             <div id="${id}_search"></div>
+             <table id="${id}" ></table>
+             <div id="${id}_pager" ></div>
+             <div id="${id}_search" ></div>
              """
 
     javascript = [jquery_jqgrid]
@@ -84,9 +88,39 @@ class JqGrid(Widget):
            "subGridUrl" : "This option points to the file from which we get the data for the subgrid. jqGrid adds the id of the row to this url as parameter. If there is a need to pass additional parameters, use the params option in subGridModel",
            "subGridModel" : "It is an array in which we describe the column model for the subgrid data",
            "subGridWidth" : "Determines the width of the subGrid column if subgrid is enabled.",
-           "beforeRequest" : "javascript callable, called before the request is sent to the server (ts.p.beforeRequest.call(ts)).",
            "postData" : "additional data to pass to the request",
+           # events http://www.trirand.com/jqgridwiki/doku.php?id=wiki:events
+           "afterInsertRow": "This event fires after every inserted row.",
+           "beforeRequest" : "javascript callable, called before the request is sent to the server (ts.p.beforeRequest.call(ts)).",
+           "beforeSelectRow": "This event fire when the user click on the row, but before select them.",
+           "gridComplete": "This fires after all the data is loaded into the grid and all other processes are complete.",
+           "loadBeforeSend": "A pre-callback to modify the XMLHttpRequest object (xhr) before it is sent.",
+           "loadComplete": "This event is executed immediately after every server request.",
+           "loadError": "A function to be called if the request fails.",
+           "onCellSelect": "Fires when we click on particular cell in the grid.",
+           "ondblClickRow": "Raised immediately after row was double clicked.",
+           "onHeaderClick": "Fire after clicking to hide or show grid (hidegrid:true)",
+           "onPaging": "This event fires after click on [page button] and before populating the data.",
+           "onRightClickRow": "Raised immediately after row was right clicked.",
+           "onSelectAll": "This event fires when multiselect option is true and you click on the header checkbox.",
+           "onSelectRow" :"Raised immediately after row was clicked.",
+           "onSortCol": "Raised immediately after sortable column was clicked and before sorting the data.",
+           "resizeStart": "Event which is called when we start resize a column.",
+           "resizeStop": "Event which is called after the column is resized.",
+           "serializeGridData": "If set this event can serialize the data passed to the ajax request.",
+
            "subGridRowExpanded" : "This event is raised when the subgrid is enabled and is executed when the user clicks on the plus icon of the grid.",
+
+           # TreeGrid options
+           "ExpandColClick" : "when true, the tree is expanded and/or collapsed when we click on the text of the expanded column, not only on the image",
+           "ExpandColumn" : "indicates which column (name from colModel) should be used to expand the tree grid. If not set the first one is used. Valid only when treeGrid option is set to true.",
+           "treedatatype" : "Determines the initial datatype (see datatype option). Usually this should not be changed. During the reading process this option is equal to the datatype option.",
+           "treeGrid" : "Enables (disables) the tree grid format.",
+           "treeGridModel" : "Determines the method used for the treeGrid. Can be nested or adjacency.",
+           "treeIcons" : "This array set the icons used in the tree. The icons should be a valid names from UI theme roller images.",
+           "treeReader" : "extends the colModel defined in the basic grid. The fields described here are added to end of the colModel array and are hidden. This means that the data returned from the server should have values for these fields.",
+           "tree_root_level" : "Determines the level where the root element begins when treeGrid is enabled",
+
            }
 
     #defaults
@@ -102,11 +136,35 @@ class JqGrid(Widget):
     multiselect = False
     multiselectWidth = 20
 
-    beforeRequest = None
     postData = {}
+    # events
+    afterInsertRow = None
+    beforeRequest = None
+    beforeSelectRow = None
+    gridComplete = None
+    loadBeforeSend = None
+    loadComplete = None
+    loadError = None
+    onCellSelect = None
+    ondblClickRow = None
+    onHeaderClick = None
+    onPaging = None
+    onRightClickRow = None
+    onSelectAll = None
+    onSelectRow = None
+    onSortCol = None
+    resizeStart = None
+    resizeStop = None
+    serializeGridData = None
+
+    subGridRowExpanded = None
+
+
+    # tree specific
+    treeGrid = False
 
     navbuttons_options = {"view":False, "edit": False, "add": False,"del": False,
-                          "search":True,"refresh":False}
+                          "search":True,"refresh":True}
 # full options for the navbuttons_options
 #            edit: true,
 #            editicon: "ui-icon-pencil",
@@ -170,13 +228,43 @@ class JqGrid(Widget):
                            toppager=self.toppager,
                            multiselect=self.multiselect,
                            multiselectWidth=self.multiselectWidth,
-                           beforeRequest=self.beforeRequest,
                            postData=self.postData,
-
+                           # events
+                           # http://www.trirand.com/jqgridwiki/doku.php?id=wiki:events
+                           afterInsertRow = self.afterInsertRow,
+                           beforeRequest = self.beforeRequest,
+                           beforeSelectRow = self.beforeSelectRow,
+                           gridComplete = self.gridComplete,
+                           loadBeforeSend = self.loadBeforeSend,
+                           loadComplete = self.loadComplete,
+                           loadError = self.loadError,
+                           onCellSelect = self.onCellSelect,
+                           ondblClickRow = self.ondblClickRow,
+                           onHeaderClick = self.onHeaderClick,
+                           onPaging = self.onPaging,
+                           onRightClickRow = self.onRightClickRow,
+                           onSelectAll = self.onSelectAll,
+                           onSelectRow = self.onSelectRow,
+                           onSortCol = self.onSortCol,
+                           resizeStart = self.resizeStart,
+                           resizeStop = self.resizeStop,
+                           serializeGridData = self.serializeGridData,
+                           # tree params
+                           # http://www.trirand.com/jqgridwiki/doku.php?id=wiki:treegrid
+                           ExpandColClick=self.ExpandColClick,
+                           ExpandColumn=self.ExpandColumn,
+                           treedatatype=self.treedatatype,
+                           treeGrid=self.treeGrid,
+                           treeGridModel=self.treeGridModel,
+                           treeIcons=self.treeIcons,
+                           treeReader=self.treeReader,
+                           tree_root_level=self.tree_root_level,
+                           # sub grids options
                            subGrid=self.subGrid,
                            subGridUrl=self.subGridUrl,
                            subGridModel=self.subGridModel,
                            subGridWidth=self.subGridWidth,
+                           # sub grids events
                            subGridRowExpanded=self.subGridRowExpanded,
                            )
         call = js_function('jQuery("#%s").jqGrid' % d.id)(grid_params)
@@ -199,3 +287,5 @@ class JqGrid(Widget):
                                      )
 
         self.add_call(nav_call)
+
+

@@ -1,3 +1,17 @@
+New in 0.3
+==========
+
+0.3
+added parameters to use the grid as a jqTreeGrid
+more events supported
+
+New in 0.2
+==========
+
+0.2
+now relies on the 3.8.2 version of the js lib
+
+
 New in 0.1
 ==========
 

@@ -2,11 +2,11 @@
 /**
  * jqGrid extension for custom methods
  * Tony Tomov tony@trirand.com
- * http://trirand.com/blog/ 
+ * http://trirand.com/blog/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl-2.0.html
-**/ 
+**/
 $.jgrid.extend({
 	getColProp : function(colname){
 		var ret ={}, $t = this[0];
@@ -57,7 +57,7 @@ $.jgrid.extend({
 	},
 	GridDestroy : function () {
 		return this.each(function(){
-			if ( this.grid ) { 
+			if ( this.grid ) {
 				if ( this.p.pager ) { // if not part of grid
 					$(this.p.pager).remove();
 				}
@@ -144,13 +144,13 @@ $.jgrid.extend({
 									if(t.p.treeGrid===true && nm == t.p.ExpandColumn) {
 										$("td:eq("+k+") > span:first",ind).html(vl).attr(title);
 									} else {
-										$("td:eq("+k+")",ind).html(vl).attr(title); 
+										$("td:eq("+k+")",ind).html(vl).attr(title);
 									}
 								}
 								success = true;
 								return true;
 							}
-						} 
+						}
 						$(t.p.colModel).each(function(i){
 							nm = jsonreader===true ? this.jsonmap || this.name :this.name;
 							if( srow[nm] !== undefined) {
@@ -159,7 +159,7 @@ $.jgrid.extend({
 								if(t.p.treeGrid===true && nm == t.p.ExpandColumn) {
 									$("td:eq("+i+") > span:first",ind).html(vl).attr(title);
 								} else {
-									$("td:eq("+i+")",ind).html(vl).attr(title); 
+									$("td:eq("+i+")",ind).html(vl).attr(title);
 								}
 								success = true;
 							}
@@ -177,7 +177,7 @@ $.jgrid.extend({
 			gridToolbar : false,
 			filterModel: [], // label/name/stype/defval/surl/sopt
 			formtype : "horizontal", // horizontal/vertical
-			autosearch: true, // if set to false a serch button should be enabled.
+			autosearch: true, // if set to false a search button should be enabled.
 			formclass: "filterform",
 			tableclass: "filtertable",
 			buttonclass: "filterbutton",
@@ -732,7 +732,7 @@ $.jgrid.extend({
 							} else if(cm.editoptions && cm.editoptions.value) {
 								oSv = cm.editoptions.value;
 							}
-							if (oSv) {	
+							if (oSv) {
 								var elem = document.createElement("select");
 								elem.style.width = "100%";
 								$(elem).attr({name:cm.index || cm.name, id: "gs_"+cm.name});

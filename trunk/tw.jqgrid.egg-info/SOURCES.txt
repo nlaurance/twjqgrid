@@ -25,10 +25,12 @@ tw/jqgrid/__init__.py
 tw/jqgrid/release.py
 tw/jqgrid/samples.py
 tw/jqgrid/widgets.py
+tw/jqgrid/static/jquery.jqGrid-3.8.1.zip
 tw/jqgrid/static/css/jquery.searchFilter.css
 tw/jqgrid/static/css/ui.jqgrid.css
 tw/jqgrid/static/i18n/grid.locale-en.js
 tw/jqgrid/static/i18n/grid.locale-fr.js
+tw/jqgrid/static/javascript/jquery.jqGrid-3.7.2.min.js
 tw/jqgrid/static/javascript/jquery.jqGrid.min.js
 tw/jqgrid/static/src/JsonXml.js
 tw/jqgrid/static/src/grid.base.js
@@ -36,6 +38,7 @@ tw/jqgrid/static/src/grid.celledit.js
 tw/jqgrid/static/src/grid.common.js
 tw/jqgrid/static/src/grid.custom.js
 tw/jqgrid/static/src/grid.formedit.js
+tw/jqgrid/static/src/grid.grouping.js
 tw/jqgrid/static/src/grid.import.js
 tw/jqgrid/static/src/grid.inlinedit.js
 tw/jqgrid/static/src/grid.jqueryui.js

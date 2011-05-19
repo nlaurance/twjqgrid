@@ -58,7 +58,7 @@ class JqGrid(Widget):
              """
 
     javascript = [jquery_jqgrid]
-    css = [smoothness_css, jqgrid_css, jqgrid_search_css]
+    css = [smoothness_css, jqgrid_css]
 
     params = {
            "url": "Tells us where to get the data.",
@@ -74,6 +74,9 @@ class JqGrid(Widget):
            "sortname" :"Sets the initial sorting column.",
            "sortorder": "Sets the initial sort order",
            "viewrecords" :"Defines whether we want to display the number of total records from the query in the pager bar",
+
+           "altRows" :"Set a zebra-striped grid",
+
            "caption" :"Sets the caption for the grid.",
            "height" : "The height of the grid.",
            "shrinkToFit" : "if True, every column width is scaled according to the defined option width.",
@@ -89,6 +92,8 @@ class JqGrid(Widget):
            "subGridModel" : "It is an array in which we describe the column model for the subgrid data",
            "subGridWidth" : "Determines the width of the subGrid column if subgrid is enabled.",
            "postData" : "additional data to pass to the request",
+           "sortable" : "When enabled this option allow column reordering with mouse.",
+
            # events http://www.trirand.com/jqgridwiki/doku.php?id=wiki:events
            "afterInsertRow": "This event fires after every inserted row.",
            "beforeRequest" : "javascript callable, called before the request is sent to the server (ts.p.beforeRequest.call(ts)).",
@@ -109,7 +114,24 @@ class JqGrid(Widget):
            "resizeStop": "Event which is called after the column is resized.",
            "serializeGridData": "If set this event can serialize the data passed to the ajax request.",
 
+           # cell events http://www.trirand.com/jqgridwiki/doku.php?id=wiki:cell_editing#events
+           "afterEditCell": "applies only to a cell that is editable; this event fires after the edited cell is edited",
+           "afterRestoreCell": "applies only to a cell that is editable;",
+           "afterSaveCell": "applies only to a cell that is editable; this event fires after the cell has been successfully saved.",
+           "afterSubmitCell": "this event Fires after the cell and other data is posted to the server",
+           "beforeEditCell": "applies only to a cell that is editable; this event fires before editing the cell.",
+           "beforeSaveCell": "applies only to a cell that is editable; this event fires before validation of values if any.",
+           "beforeSubmitCell": "applies only to a cell that is editable; this event fires before submit the cell content to the server",
+           "errorCell": "fires if there is a server error; servereresponse is the response from the server.",
+           "formatCell": "applies only to a cell that is editable; this event allows formatting the cell content before editing",
+           "onSelectCell": "applies only to cells that are not editable; fires after the cell is selected",
+           "serializeCellData": "If set this event can serialize the data passed to the ajax request when we save a cell. ",
+
+           # subgrid events http://www.trirand.com/jqgridwiki/doku.php?id=wiki:subgrid#events
+           "subGridBeforeExpand": "The event is raised just before expanding the grid. When set, this event should return true or false.",
            "subGridRowExpanded" : "This event is raised when the subgrid is enabled and is executed when the user clicks on the plus icon of the grid.",
+           "subGridRowColapsed" : "This event is raised when the user clicks on the minus icon. The event should return true or false",
+           "serializeSubGridData": "If set this event can serialize the data passed to the ajax request. The function should return the serialized data. This event can be used when a custom data should be passed to the server",
 
            # TreeGrid options
            "ExpandColClick" : "when true, the tree is expanded and/or collapsed when we click on the text of the expanded column, not only on the image",
@@ -135,8 +157,12 @@ class JqGrid(Widget):
     autowidth = True
     multiselect = False
     multiselectWidth = 20
-
     postData = {}
+    sortable = False
+
+    altRows = False
+
+
     # events
     afterInsertRow = None
     beforeRequest = None
@@ -157,9 +183,23 @@ class JqGrid(Widget):
     resizeStop = None
     serializeGridData = None
 
+    subGridBeforeExpand = None
     subGridRowExpanded = None
+    subGridRowColapsed = None
+    serializeSubGridData = None
 
-
+    # cell events
+    afterEditCell = None
+    afterRestoreCell = None
+    afterSaveCell = None
+    afterSubmitCell = None
+    beforeEditCell = None
+    beforeSaveCell = None
+    beforeSubmitCell = None
+    errorCell = None
+    formatCell = None
+    onSelectCell = None
+    serializeCellData = None
     # tree specific
     treeGrid = False
 
@@ -206,66 +246,87 @@ class JqGrid(Widget):
 
     def update_params(self, d):
         super(JqGrid, self).update_params(d)
-        grid_params = dict(url=self.url,
-                           editurl=self.editurl,
-                           datatype=self.datatype,
-                           mtype=self.mtype,
-                           colNames=self.colNames,
-                           colModel=self.colModel,
-                           pager=self.pager,
-                           rowNum=self.rowNum,
-                           rowList=self.rowList,
-                           sortname=self.sortname,
-                           sortorder=self.sortorder,
-                           viewrecords=self.viewrecords,
-                           caption=self.caption,
-                           shrinkToFit=self.shrinkToFit,
-                           height=self.height,
-                           width=self.width,
-                           autowidth=self.autowidth,
-                           toolbar=self.toolbar,
-                           rownumbers=self.rownumbers,
-                           toppager=self.toppager,
-                           multiselect=self.multiselect,
-                           multiselectWidth=self.multiselectWidth,
-                           postData=self.postData,
+        grid_params = dict(url=d.url,
+                           editurl=d.editurl,
+                           datatype=d.datatype,
+                           mtype=d.mtype,
+                           colNames=d.colNames,
+                           colModel=d.colModel,
+                           pager=d.pager,
+                           rowNum=d.rowNum,
+                           rowList=d.rowList,
+                           sortname=d.sortname,
+                           sortorder=d.sortorder,
+                           viewrecords=d.viewrecords,
+                           caption=d.caption,
+
+                           altRows=d.altRows,
+
+                           shrinkToFit=d.shrinkToFit,
+                           height=d.height,
+                           width=d.width,
+                           autowidth=d.autowidth,
+                           toolbar=d.toolbar,
+                           rownumbers=d.rownumbers,
+                           toppager=d.toppager,
+                           multiselect=d.multiselect,
+                           multiselectWidth=d.multiselectWidth,
+                           postData=d.postData,
+                           sortable=d.sortable,
+
                            # events
                            # http://www.trirand.com/jqgridwiki/doku.php?id=wiki:events
-                           afterInsertRow = self.afterInsertRow,
-                           beforeRequest = self.beforeRequest,
-                           beforeSelectRow = self.beforeSelectRow,
-                           gridComplete = self.gridComplete,
-                           loadBeforeSend = self.loadBeforeSend,
-                           loadComplete = self.loadComplete,
-                           loadError = self.loadError,
-                           onCellSelect = self.onCellSelect,
-                           ondblClickRow = self.ondblClickRow,
-                           onHeaderClick = self.onHeaderClick,
-                           onPaging = self.onPaging,
-                           onRightClickRow = self.onRightClickRow,
-                           onSelectAll = self.onSelectAll,
-                           onSelectRow = self.onSelectRow,
-                           onSortCol = self.onSortCol,
-                           resizeStart = self.resizeStart,
-                           resizeStop = self.resizeStop,
-                           serializeGridData = self.serializeGridData,
+                           afterInsertRow = d.afterInsertRow,
+                           beforeRequest = d.beforeRequest,
+                           beforeSelectRow = d.beforeSelectRow,
+                           gridComplete = d.gridComplete,
+                           loadBeforeSend = d.loadBeforeSend,
+                           loadComplete = d.loadComplete,
+                           loadError = d.loadError,
+                           onCellSelect = d.onCellSelect,
+                           ondblClickRow = d.ondblClickRow,
+                           onHeaderClick = d.onHeaderClick,
+                           onPaging = d.onPaging,
+                           onRightClickRow = d.onRightClickRow,
+                           onSelectAll = d.onSelectAll,
+                           onSelectRow = d.onSelectRow,
+                           onSortCol = d.onSortCol,
+                           resizeStart = d.resizeStart,
+                           resizeStop = d.resizeStop,
+                           serializeGridData = d.serializeGridData,
+
                            # tree params
                            # http://www.trirand.com/jqgridwiki/doku.php?id=wiki:treegrid
-                           ExpandColClick=self.ExpandColClick,
-                           ExpandColumn=self.ExpandColumn,
-                           treedatatype=self.treedatatype,
-                           treeGrid=self.treeGrid,
-                           treeGridModel=self.treeGridModel,
-                           treeIcons=self.treeIcons,
-                           treeReader=self.treeReader,
-                           tree_root_level=self.tree_root_level,
+                           ExpandColClick=d.ExpandColClick,
+                           ExpandColumn=d.ExpandColumn,
+                           treedatatype=d.treedatatype,
+                           treeGrid=d.treeGrid,
+                           treeGridModel=d.treeGridModel,
+                           treeIcons=d.treeIcons,
+                           treeReader=d.treeReader,
+                           tree_root_level=d.tree_root_level,
                            # sub grids options
-                           subGrid=self.subGrid,
-                           subGridUrl=self.subGridUrl,
-                           subGridModel=self.subGridModel,
-                           subGridWidth=self.subGridWidth,
+                           subGrid=d.subGrid,
+                           subGridUrl=d.subGridUrl,
+                           subGridModel=d.subGridModel,
+                           subGridWidth=d.subGridWidth,
                            # sub grids events
-                           subGridRowExpanded=self.subGridRowExpanded,
+                           subGridBeforeExpand=d.subGridBeforeExpand,
+                           subGridRowExpanded=d.subGridRowExpanded,
+                           subGridRowColapsed=d.subGridRowColapsed,
+                           serializeSubGridData=d.serializeSubGridData,
+                           # cell events
+                           afterEditCell=d.afterEditCell,
+                           afterRestoreCell=d.afterRestoreCell,
+                           afterSaveCell=d.afterSaveCell,
+                           afterSubmitCell=d.afterSubmitCell,
+                           beforeEditCell=d.beforeEditCell,
+                           beforeSaveCell=d.beforeSaveCell,
+                           beforeSubmitCell=d.beforeSubmitCell,
+                           errorCell=d.errorCell,
+                           formatCell=d.formatCell,
+                           onSelectCell=d.onSelectCell,
+                           serializeCellData=d.serializeCellData,
                            )
         call = js_function('jQuery("#%s").jqGrid' % d.id)(grid_params)
         self.add_call(call)

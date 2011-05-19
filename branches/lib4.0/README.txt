@@ -13,8 +13,10 @@ the version released with this package is 3.8.1
 Use as a grid
 -------------
 
-in the view controller ::
-~~~~~~~~~~~~~~~~~~~~~~~~~
+in the view controller
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     from tw.jqgrid import JqGrid
     colNames = ['ID','Title', 'Synopsis']
@@ -23,13 +25,14 @@ in the view controller ::
                 {'name':'title', 'index':'title','width':100, 'align':'left'},
                 {'name':'synopsis', 'index':'synopsis','width':580, 'align':'left', 'sortable':False},
                ]
+
     search_options = {
           "caption": "Search...",
           "Find": "Find",
           "Reset": "Reset",
           "sopt" : ['cn', 'bw'],
           "closeOnEscape":True,
-    }
+          }
 
     navbuttons_options = {
                           "view":False,
@@ -50,7 +53,7 @@ in the view controller ::
                 shrinkToFit=True,
                 search_options = search_options,
                 navbuttons_options = navbuttons_options,
-    )
+                )
 
 
     class MoviesController(BaseRestController):

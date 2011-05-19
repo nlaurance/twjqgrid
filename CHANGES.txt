@@ -1,5 +1,14 @@
+New in 0.4
+==========
+
+0.4
+now relies on the 4.0.0 version of the js lib
+
 New in 0.3
 ==========
+
+0.3.1
+added `sortable` parameter
 
 0.3
 added parameters to use the grid as a jqTreeGrid

@@ -1,6 +1,9 @@
 New in 0.3
 ==========
 
+0.3.1
+added parameter to show/hide collapse button
+
 0.3
 added parameters to use the grid as a jqTreeGrid
 more events supported

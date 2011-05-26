@@ -75,6 +75,7 @@ class JqGrid(Widget):
            "sortorder": "Sets the initial sort order",
            "viewrecords" :"Defines whether we want to display the number of total records from the query in the pager bar",
            "caption" :"Sets the caption for the grid.",
+           "hidegrid" :"Enables or disables the show/hide grid button, which appears on the right side of the Caption layer.",
            "height" : "The height of the grid.",
            "shrinkToFit" : "if True, every column width is scaled according to the defined option width.",
            "width" : "If this option is set, the initial width of each column is set according to the value of shrinkToFit option.",
@@ -131,6 +132,7 @@ class JqGrid(Widget):
     subGrid = False
     toolbar = [False, '']
     rownumbers = False
+    hidegrid = False
     toppager = False
     autowidth = True
     multiselect = False
@@ -219,6 +221,7 @@ class JqGrid(Widget):
                            sortorder=self.sortorder,
                            viewrecords=self.viewrecords,
                            caption=self.caption,
+                           hidegrid=self.hidegrid,
                            shrinkToFit=self.shrinkToFit,
                            height=self.height,
                            width=self.width,

@@ -30,7 +30,6 @@ tw/jqgrid/static/css/jquery.searchFilter.css
 tw/jqgrid/static/css/ui.jqgrid.css
 tw/jqgrid/static/i18n/grid.locale-en.js
 tw/jqgrid/static/i18n/grid.locale-fr.js
-tw/jqgrid/static/javascript/jquery.jqGrid-3.7.2.min.js
 tw/jqgrid/static/javascript/jquery.jqGrid.min.js
 tw/jqgrid/static/src/JsonXml.js
 tw/jqgrid/static/src/grid.base.js

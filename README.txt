@@ -13,8 +13,10 @@ the version released with this package is 3.8.1
 Use as a grid
 -------------
 
-in the view controller ::
-~~~~~~~~~~~~~~~~~~~~~~~~~
+in the view controller
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     from tw.jqgrid import JqGrid
     colNames = ['ID','Title', 'Synopsis']

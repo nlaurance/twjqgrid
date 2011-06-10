@@ -62,8 +62,10 @@ in the view controller
             pylons.c.grid = grid_local
             return dict(page='all movies')
 
-in the template::
-~~~~~~~~~~~~~~~~~
+in the template
+~~~~~~~~~~~~~~~
+
+::
 
     ${tmpl_context.grid()}
 

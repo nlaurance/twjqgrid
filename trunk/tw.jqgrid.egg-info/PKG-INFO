@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: tw.jqgrid
-Version: 0.3.1dev-20110610
+Version: 0.3.1
 Summary: tosca widget wrapper around jqgrid library
 Home-page: http://code.google.com/p/twjqgrid
 Author: Nicolas Laurance
@@ -27,8 +27,10 @@ Description:
         Use as a grid
         -------------
         
-        in the view controller ::
-        ~~~~~~~~~~~~~~~~~~~~~~~~~
+        in the view controller
+        ~~~~~~~~~~~~~~~~~~~~~~
+        
+        ::
         
             from tw.jqgrid import JqGrid
             colNames = ['ID','Title', 'Synopsis']
@@ -142,6 +144,7 @@ Description:
         
         Change history
         **************
+        
         
         New in 0.3
         ==========

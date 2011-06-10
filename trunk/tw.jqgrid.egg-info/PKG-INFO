@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: tw.jqgrid
-Version: 0.2dev-20110201
+Version: 0.3.1dev-20110610
 Summary: tosca widget wrapper around jqgrid library
 Home-page: http://code.google.com/p/twjqgrid
 Author: Nicolas Laurance
@@ -24,7 +24,11 @@ Description:
         
         the version released with this package is 3.8.1
         
+        Use as a grid
+        -------------
+        
         in the view controller ::
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
         
             from tw.jqgrid import JqGrid
             colNames = ['ID','Title', 'Synopsis']
@@ -71,6 +75,7 @@ Description:
                     return dict(page='all movies')
         
         in the template::
+        ~~~~~~~~~~~~~~~~~
         
             ${tmpl_context.grid()}
         
@@ -104,6 +109,7 @@ Description:
         .. note:: this is written for an elixir model, adapt to your need
         
         design it:
+        ~~~~~~~~~~
         
         tw.jqgrid rely on tw.uitheme for its design, the smooth theme is the default
         you can use any other theme, or roll your own `theme <http://jqueryui.com/themeroller/>`_
@@ -117,6 +123,7 @@ Description:
                 css = [peppergrinder_css, jqgrid_css, jqgrid_search_css]
         
             grid_local = CustomGrid(.....
+        
         
         
         Contributors
@@ -135,6 +142,17 @@ Description:
         
         Change history
         **************
+        
+        New in 0.3
+        ==========
+        
+        0.3.1
+        added parameter to show/hide collapse button
+        more control of pager options
+        
+        0.3
+        added parameters to use the grid as a jqTreeGrid
+        more events supported
         
         New in 0.2
         ==========
